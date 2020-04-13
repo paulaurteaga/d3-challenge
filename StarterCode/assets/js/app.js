@@ -104,7 +104,7 @@ function YScale(sample, chosenYAxis) {
       .attr("r", 10)
       .attr("opacity", ".5")
       .classed("stateCircle", true)
-      .classed("abbr",true)
+      //.classed("abbr",true)
       .text(function(d,i){
         return d.abbr;
       })
@@ -252,20 +252,25 @@ function renderXAxes(newXScale, xAxis) {
             .attr("cy", function(data) {
               return yLinearScale(+data[chosenYAxis]);
             })
+            .duration(1800)
            
         ;
         
-        d3.selectAll(".abbr").each(function() {
+        d3.selectAll("text").each(function() {
           d3
             .select(this)
             .transition()
             .attr("x", function(data) {
-              return xLinearScale(Number(data[chosenXAxis]));
+              return xLinearScale(+data[chosenXAxis]);
+            })
+            .attr("y", function(data){
+              return yLinearScale(+data[chosenYAxis])
             })
             .duration(1800);
         });
         
-          
+        //stil have to add update code for the tooltips
+        
         })
       
 
